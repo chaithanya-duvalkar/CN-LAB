@@ -10,3 +10,13 @@ BEGIN{
 }END{
     printf("The number of ping packets dropped are",drop_count);
 }
+
+
+
+/d/{
+    if($0~/Ping/){
+        drop_count++
+    }
+}END{
+    print "The number of ping packets dropped are",drop_count
+}

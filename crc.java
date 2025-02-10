@@ -16,7 +16,7 @@ public class crc {
                 if(n-i<m) break;
                 for(int j=0;j<m;j++)
                 {
-                    divident[i+j]=divisor[j]=='0'?divident[i+j]:divident[i+j]=='0'?'0':'1';
+                    divident[i+j]=divisor[j]=='0'?divident[i+j]:divident[i+j]=='1'?'0':'1';
                 }
             }
          }

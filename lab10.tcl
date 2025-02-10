@@ -1,3 +1,18 @@
+10 Implement three nodes point – to – point network with duplex links 
+between them. Set the queue size, vary the bandwidth and find the number 
+of packets dropped. 
+
+12 Implement an Ethernet LAN using n nodes and set multiple traffic nodes 
+and plot congestion window for different source / destination. 
+
+13 Implement simple ESS and with transmitting nodes in wire-less LAN by 
+simulation and determine the performance with respect to transmission of 
+packets 
+
+
+
+
+
 set ns [new simulator]
 
 set ntrace [open lab10.tr w]
@@ -42,3 +57,10 @@ set sink0 [new Agent/TCPSink]
 $ns attach-agent $n2 sink0
 $ns connect $tcp0 $sink0
 
+
+
+
+
+gedit -s lab10.tcl
+
+ns lab10.tcl
