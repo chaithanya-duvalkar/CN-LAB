@@ -7,14 +7,14 @@
 set ns [new Simulator]
 
 #set color
-set color 1 Blue
-set color 2 Red
+$ns color 1 Blue
+$ns color 2 Red
 
 #open nam and trace file
-set trace [open lab11.tr w]
+set ntrace [open lab11.tr w]
 $ns trace-all $ntrace
 set namfile [open lab11.nam w]
-$ns ntrace-all $namfile
+$ns namtrace-all $namfile
 
 #finish procedure
 proc Finish {} {
@@ -29,25 +29,25 @@ close $namfile
 exec nam lab11.nam &
 
 #find packets dropped
-exec echo "packets dropped are" &
+puts "packets dropped are: " 
 exec grep "^d" lab11.tr | cut -d " " -f 5 | grep -c "ping" &
 exit 0
 }
 
 #create 6 nodes
-for {set i 0} {i < 6} {incr i} {
+for {set i 0} {$i < 6} {incr i} {
 set n($i) [$ns node]
 }
 
 #link nodes
-for {set j 0} {j < 5} {incr j} {
+for {set j 0} {$j < 5} {incr j} {
 $ns duplex-link $n($j) $n([expr ($j+1)]) 0.1Mb 10ms DropTail
 }
 
 #define the recv function
 Agent/Ping instproc recv {from rtt} {
 $self instvar node_
-puts "node [$node_ id] recieved ping answer from $from with round trip time $rtt ms"
+puts "node [$node_ id] received ping answer from $from with round trip time $rtt ms"
 }
 
 #create two ping agents
