@@ -1,4 +1,3 @@
-
 #set simulator
 set ns [new Simulator]
 
