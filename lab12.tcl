@@ -20,12 +20,14 @@ set winFile1 [open WinFile1 w]
 
 #finish procedure
 proc Finish {} {
-global ns ntrace namfile
+global ns ntrace namfile winFile0 winFile1
 
 #dump trace data
 $ns flush-trace
 close $ntrace
 close $namfile
+close $winFile0
+close $winFile1
 
 #execute nam animation file
 exec nam lab12.nam &
@@ -45,24 +47,24 @@ $ns at [expr $now+$time] "PlotWindow $tcpSource $file"
 }
 
 #create 6 nodes
-for {set i 0} {i < 6} {incr i} {
+for {set i 0} {$i < 6} {incr i} {
 set n($i) [$ns node]
 }
 
 #link nodes
 $ns duplex-link $n(0) $n(2) 2Mb 10ms DropTail
 $ns duplex-link $n(1) $n(2) 2Mb 10ms DropTail
-$ns duplex-link $n(2) $n(3) 0.6Mb 10ms DropTail
+$ns duplex-link $n(2) $n(3) 0.6Mb 100ms DropTail
 
 #set lan 
-set lan [$ns newlan "$n(3) $n(4) $n(5)" 0.5Mb 40ms LL Queue/DropTail MAC/802_3 Channel]
+set lan [$ns newLan "$n(3) $n(4) $n(5)" 0.5Mb 40ms LL Queue/DropTail MAC/802_3 Channel]
 
 #set orientation
 $ns duplex-link-op $n(0) $n(2) orient right-down
 $ns duplex-link-op $n(1) $n(2) orient right-up
 $ns duplex-link-op $n(2) $n(3) orient right
 
-#queue limit
+#queue limit btwn n2 and n3
 $ns queue-limit $n(2) $n(3) 20
 $ns duplex-link-op $n(2) $n(3) queuePos 0.5
 
@@ -89,7 +91,7 @@ $ftp0 set type_ FTP
 
 #setup another tcp for n5 and n1
 set tcp1 [new Agent/TCP/Newreno]
-$tcp1 set fid_ 1
+$tcp1 set fid_ 2
 $tcp1 set window_ 8000
 $tcp1 set packetSize_ 552
 $ns attach-agent $n(5) $tcp1
