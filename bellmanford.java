@@ -38,17 +38,19 @@ public class bellmanford
         //to find shortest distance by n-1 iterations
         for(int i=0;i<n-1;i++)
         {
-            for(int u=0;u<n;u++)
+            for(int u=0;u<n;u++)   //u represents the current vertex from which we try to relax edges
             {
-                for(int v=0;v<n;v++)
+                for(int v=0;v<n;v++)  //v is the node we are trying to update the shortest distance for.
                 {
                     if(graph[u][v]!=0&&dist[u]!=Integer.MAX_VALUE&&dist[u]+graph[u][v]<dist[v])
                     {
                         dist[v]=dist[u]+graph[u][v];
                     }
-                }
-            }
-        }
+                }                      //graph[u][v] != 0 → Ensures there is an edge between u and v.                                                  
+            }             //dist[u] != Integer.MAX_VALUE → Ensures u is reachable.
+        }      //dist[u] + graph[u][v] < dist[v] → Checks if the new path (u → v) is shorter than the current distance of v.
+
+
 
         //finds the negative cycle in the graph
         for(int u=0;u<n;u++)
@@ -72,5 +74,5 @@ public class bellmanford
         {
             System.out.println((i+1)+"\t\t"+(dist[i]==Integer.MAX_VALUE?"Infinity":dist[i]));
         }
-    }
-}
+    }                                   //In Java arrays, indexing starts from 0.
+}                                       //If vertices are numbered from 1, we print (i+1) instead of i.
