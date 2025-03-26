@@ -21,7 +21,7 @@ import java.util.*;
         }
         prk=puk.modInverse(phi);
         System.out.println("Public key:(e="+puk+"n="+mod+")");
-        System.out.println("Private key:(e="+prk+"n="+mod+")");
+        System.out.println("Private key:(d="+prk+"n="+mod+")");
     }
 
     BigInteger encrypt(BigInteger m)
@@ -43,7 +43,7 @@ class RSA
         rsa.getkeys(512);
         Scanner sc=new Scanner(System.in);
         System.out.println("Enter the msg to encrypt:");
-        BigInteger m=new BigInteger(sc.next().getBytes());
+        BigInteger m=new BigInteger(sc.nextLine().getBytes());
         BigInteger c=rsa.encrypt(m);
         System.out.println("Encoded data:"+c.longValue());
         BigInteger d=rsa.decrypt(c);
