@@ -10,14 +10,14 @@ class sort
         int fnum;
         String content;
 
-    Frame(int n,String s)
-    {
-        this.fnum=n;
-        this.content=s;
+        Frame(int n,String s)
+        {
+            this.fnum=n;
+            this.content=s;
+        }
     }
-}
 
-    //to swap the frames
+    //to swap and sort the frames
     public static void bubblesort(Frame[] F,int n)
     {
         for(int i=0;i<n;i++)
@@ -81,7 +81,4 @@ class sort
         System.out.println();
         sc.close();
     }
-
-
-
 }
