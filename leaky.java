@@ -42,3 +42,10 @@ public class leaky
     }
     
 }
+/* 
+packetSize	Current packet size being processed
+currentBucketSize	Size of the bucket after adding the packet
+Math.min(outputRate, currentBucketSize)	Packets sent (cannot exceed outputRate)
+Math.max(0, currentBucketSize - outputRate)	Remaining packets in the bucket
+Accepted/Dropped	Whether the packet was accepted or dropped
+*/
